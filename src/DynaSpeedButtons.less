@@ -1,0 +1,27 @@
+.dyna-speed-buttons {
+  white-space: nowrap;
+  &__style- {
+    &ROUNDED {
+      a:first-child {
+        button {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;;
+        }
+      }
+      a:not(:first-child):not(:last-child) {
+        button {
+          border-radius: 0;
+        }
+      }
+      a:last-child {
+        button {
+          border-top-left-radius: 0 !important;;
+          border-bottom-left-radius: 0 !important;;
+        }
+      }
+    }
+    &FLAT {
+      // no need to do anything
+    }
+  }
+}
