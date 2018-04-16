@@ -1,2 +1,2 @@
-import { DynaButton, IDynaButtonProps, EStyle, EColor, ESize } from "./DynaButton";
-export { DynaButton, IDynaButtonProps, EStyle, EColor, ESize };
+import { DynaSpeedButtons, IDynaSpeedButtonsProps, EStyle, EColor, ESize } from "./DynaSpeedButtons";
+export { DynaSpeedButtons, IDynaSpeedButtonsProps, EStyle, EColor, ESize };

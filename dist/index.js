@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("react"), require("dyna-ui-button"));
 	else if(typeof define === 'function' && define.amd)
-		define("dyna-ts-react-module-boilerplate", ["react"], factory);
+		define("dyna-ui-speed-buttons", ["react", "dyna-ui-button"], factory);
 	else if(typeof exports === 'object')
-		exports["dyna-ts-react-module-boilerplate"] = factory(require("react"));
+		exports["dyna-ui-speed-buttons"] = factory(require("react"), require("dyna-ui-button"));
 	else
-		root["dyna-ts-react-module-boilerplate"] = factory(root["react"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_3__) {
+		root["dyna-ui-speed-buttons"] = factory(root["react"], root["dyna-ui-button"]);
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -87,11 +87,11 @@ module.exports = __webpack_require__(1);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var DynaButton_1 = __webpack_require__(2);
-exports.DynaButton = DynaButton_1.DynaButton;
-exports.EStyle = DynaButton_1.EStyle;
-exports.EColor = DynaButton_1.EColor;
-exports.ESize = DynaButton_1.ESize;
+var DynaSpeedButtons_1 = __webpack_require__(2);
+exports.DynaSpeedButtons = DynaSpeedButtons_1.DynaSpeedButtons;
+exports.EStyle = DynaSpeedButtons_1.EStyle;
+exports.EColor = DynaSpeedButtons_1.EColor;
+exports.ESize = DynaSpeedButtons_1.ESize;
 
 
 /***/ }),
@@ -112,52 +112,67 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(3);
-__webpack_require__(4);
-var EStyle;
-(function (EStyle) {
-    EStyle["ROUNDED"] = "ROUNDED";
-})(EStyle = exports.EStyle || (exports.EStyle = {}));
+var dyna_ui_button_1 = __webpack_require__(4);
+exports.EStyle = dyna_ui_button_1.EStyle;
+exports.ESize = dyna_ui_button_1.ESize;
+__webpack_require__(5);
 var EColor;
 (function (EColor) {
+    EColor["ORANGE_WHITE"] = "ORANGE_WHITE";
     EColor["WHITE_BLACK"] = "WHITE_BLACK";
-    EColor["WHITE_RED"] = "WHITE_RED";
-    EColor["BLACK_WHITE"] = "BLACK_WHITE";
-    EColor["TRANSPARENT_WHITE"] = "TRANSPARENT_WHITE";
+    EColor["RED_WHITE"] = "RED_WHITE";
 })(EColor = exports.EColor || (exports.EColor = {}));
-var ESize;
-(function (ESize) {
-    ESize["SMALL"] = "SMALL";
-    ESize["MEDIUM"] = "MEDIUM";
-    ESize["LARGE"] = "LARGE";
-    ESize["XLARGE"] = "XLARGE";
-})(ESize = exports.ESize || (exports.ESize = {}));
-var DynaButton = /** @class */ (function (_super) {
-    __extends(DynaButton, _super);
-    function DynaButton() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var DynaSpeedButtons = /** @class */ (function (_super) {
+    __extends(DynaSpeedButtons, _super);
+    function DynaSpeedButtons() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.baseClassName = "dyna-speed-buttons";
+        _this.className = function (classNames) {
+            if (classNames === void 0) { classNames = ""; }
+            return ("" + _this.baseClassName + classNames).trim();
+        };
+        return _this;
     }
-    DynaButton.prototype.render = function () {
-        var _a = this.props, children = _a.children, style = _a.style, color = _a.color, size = _a.size, href = _a.href, onClick = _a.onClick;
+    DynaSpeedButtons.prototype.getButtonColor = function (selected) {
+        var color = this.props.color;
+        switch (color) {
+            case EColor.ORANGE_WHITE:
+                if (selected)
+                    return dyna_ui_button_1.EColor.ORANGE_WHITE;
+                else
+                    return dyna_ui_button_1.EColor.WHITE_ORANGE;
+            case EColor.WHITE_BLACK:
+                if (selected)
+                    return dyna_ui_button_1.EColor.BLACK_WHITE;
+                else
+                    return dyna_ui_button_1.EColor.WHITE_BLACK;
+            case EColor.RED_WHITE:
+                if (selected)
+                    return dyna_ui_button_1.EColor.RED_WHITE;
+                else
+                    return dyna_ui_button_1.EColor.WHITE_RED;
+        }
+    };
+    DynaSpeedButtons.prototype.render = function () {
+        var _this = this;
+        var _a = this.props, style = _a.style, size = _a.size, options = _a.options, onClick = _a.onClick;
         var className = [
-            'dyna-button',
-            "dnbtn-style-" + style,
-            "dnbtn-color-" + color,
-            "dnbtn-size-" + size,
+            'dyna-speed-buttons',
+            this.className("__style-" + style),
         ].join(' ').trim();
-        return (React.createElement("a", { className: className, href: href, onClick: onClick },
-            React.createElement("button", null, children)));
+        return (React.createElement("div", { className: className }, options.map(function (option, index) {
+            return (React.createElement(dyna_ui_button_1.DynaButton, { key: index, style: style, color: _this.getButtonColor(option.selected), size: size, onClick: function () { return onClick(option.value); } }, option.label));
+        })));
     };
-    DynaButton.defaultProps = {
-        children: null,
-        style: EStyle.ROUNDED,
+    DynaSpeedButtons.defaultProps = {
+        style: dyna_ui_button_1.EStyle.ROUNDED,
         color: EColor.WHITE_BLACK,
-        size: ESize.MEDIUM,
-        href: null,
-        onClick: function () { return undefined; },
+        size: dyna_ui_button_1.ESize.MEDIUM,
+        onClick: function (value) { return undefined; },
     };
-    return DynaButton;
+    return DynaSpeedButtons;
 }(React.Component));
-exports.DynaButton = DynaButton;
+exports.DynaSpeedButtons = DynaSpeedButtons;
 
 
 /***/ }),
@@ -168,12 +183,18 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(5);
+var content = __webpack_require__(6);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -181,14 +202,14 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(7)(content, options);
+var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./dyna-button.less", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./dyna-button.less");
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./DynaSpeedButtons.less", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./DynaSpeedButtons.less");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -198,21 +219,21 @@ if(false) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(7)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".dyna-button {\n  outline: none;\n}\n.dyna-button.dnbtn-style-ROUNDED {\n  font-size: 0;\n}\n.dyna-button.dnbtn-style-ROUNDED button {\n  outline: none;\n  border-style: solid;\n  cursor: pointer;\n  -webkit-transition: background-color 200ms ease-out;\n  transition: background-color 200ms ease-out;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-SMALL button {\n  padding: 2px 8px;\n  font-size: 8px;\n  line-height: 10px;\n  border-width: 1px;\n  border-radius: 8px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-SMALL button:active {\n  position: relative;\n  top: 1px;\n  left: 1px;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-MEDIUM button {\n  padding: 4px 16px;\n  font-size: 14px;\n  line-height: 22px;\n  border-width: 1px;\n  border-radius: 16px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-MEDIUM button:active {\n  position: relative;\n  top: 1px;\n  left: 1px;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-LARGE button {\n  padding: 8px 32px;\n  font-size: 26px;\n  line-height: 46px;\n  border-width: 1px;\n  border-radius: 32px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-LARGE button:active {\n  position: relative;\n  top: 2px;\n  left: 2px;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-XLARGE button {\n  padding: 16px 64px;\n  font-size: 40px;\n  line-height: 92px;\n  border-width: 2px;\n  border-radius: 64px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-XLARGE button:active {\n  position: relative;\n  top: 2px;\n  left: 2px;\n}\n.dyna-button.dnbtn-color-WHITE_BLACK button {\n  border-color: black;\n  background: white;\n  color: black;\n}\n.dyna-button.dnbtn-color-WHITE_BLACK button:hover {\n  background-color: #e6e6e6;\n}\n.dyna-button.dnbtn-color-WHITE_BLACK button:active {\n  background-color: #d1d1d1;\n}\n.dyna-button.dnbtn-color-WHITE_RED button {\n  border-color: red;\n  background: white;\n  color: red;\n}\n.dyna-button.dnbtn-color-WHITE_RED button:hover {\n  background-color: #e6e6e6;\n}\n.dyna-button.dnbtn-color-WHITE_RED button:active {\n  background-color: #d1d1d1;\n}\n.dyna-button.dnbtn-color-BLACK_WHITE button {\n  border-color: black;\n  background: black;\n  color: white;\n}\n.dyna-button.dnbtn-color-BLACK_WHITE button:hover {\n  background-color: #333333;\n}\n.dyna-button.dnbtn-color-BLACK_WHITE button:active {\n  background-color: #525252;\n}\n.dyna-button.dnbtn-color-TRANSPARENT_WHITE button {\n  border-color: white;\n  background: transparent;\n  color: white;\n}\n.dyna-button.dnbtn-color-TRANSPARENT_WHITE button:hover {\n  border-color: #e6e6e6;\n  color: #e6e6e6;\n}\n.dyna-button.dnbtn-color-TRANSPARENT_WHITE button:active {\n  border-color: #d1d1d1;\n  color: #d1d1d1;\n}\n", ""]);
+exports.push([module.i, ".dyna-speed-buttons {\n  white-space: nowrap;\n}\n.dyna-speed-buttons__style-ROUNDED a:first-child button {\n  border-top-right-radius: 0 !important;\n  border-bottom-right-radius: 0 !important;\n}\n.dyna-speed-buttons__style-ROUNDED a:not(:first-child):not(:last-child) button {\n  border-radius: 0;\n}\n.dyna-speed-buttons__style-ROUNDED a:last-child button {\n  border-top-left-radius: 0 !important;\n  border-bottom-left-radius: 0 !important;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -294,7 +315,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -340,7 +361,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(8);
+var	fixUrls = __webpack_require__(9);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -653,7 +674,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
