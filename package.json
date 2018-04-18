@@ -1,6 +1,6 @@
 {
   "name": "dyna-ui-speed-buttons",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React stateless button bar for speed buttons or multi buttons",
   "repository": {
     "type": "git",
