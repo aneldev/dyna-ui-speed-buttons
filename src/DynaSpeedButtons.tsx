@@ -7,8 +7,8 @@ export interface IDynaSpeedButtonsProps {
 	style?: EStyle;
 	color?: EColor;
 	size?: ESize;
-	options?: IOption[];
-	onClick?: (value: any) => void;
+	options: IOption[];
+	onClick: (value: any) => void;
 }
 
 export enum EColor {
@@ -32,6 +32,7 @@ export class DynaSpeedButtons extends React.Component<IDynaSpeedButtonsProps> {
 		style: EStyle.ROUNDED,
 		color: EColor.WHITE_BLACK,
 		size: ESize.MEDIUM,
+		options: [],
 		onClick: (value: any) => undefined,
 	};
 
