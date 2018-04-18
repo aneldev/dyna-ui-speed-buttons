@@ -168,6 +168,7 @@ var DynaSpeedButtons = /** @class */ (function (_super) {
         style: dyna_ui_button_1.EStyle.ROUNDED,
         color: EColor.WHITE_BLACK,
         size: dyna_ui_button_1.ESize.MEDIUM,
+        options: [],
         onClick: function (value) { return undefined; },
     };
     return DynaSpeedButtons;

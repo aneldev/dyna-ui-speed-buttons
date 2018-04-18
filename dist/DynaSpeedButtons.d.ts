@@ -5,8 +5,8 @@ export interface IDynaSpeedButtonsProps {
     style?: EStyle;
     color?: EColor;
     size?: ESize;
-    options?: IOption[];
-    onClick?: (value: any) => void;
+    options: IOption[];
+    onClick: (value: any) => void;
 }
 export declare enum EColor {
     ORANGE_WHITE = "ORANGE_WHITE",
